@@ -25,7 +25,13 @@ async function run() {
   try {
     await client.connect();
 
+    const jobsCollection = client.db('jobportaldb').collection('jobs');
 
+    //jobs api
+    app.get('/jobs', async(req, res)=>{
+      const result = await jobsCollection.find().toArray();
+      res.send(result);
+    })
 
 
 
