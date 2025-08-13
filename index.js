@@ -48,6 +48,10 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/applications', async(req, res)=>{
+      const applications = await applicationCollection.find().toArray();
+      res.send(applications);
+    })
 
 
     // Send a ping to confirm a successful connection
