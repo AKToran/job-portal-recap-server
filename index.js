@@ -42,16 +42,24 @@ async function run() {
     })
 
     //application apis:
+    app.get('/applications', async(req, res)=>{
+      const email = req.query.email;
+      const query = { applicant : email };
+      const result = await applicationCollection.find(query).toArray();
+      res.send(result);
+    })
+
     app.post('/applications', async(req, res)=>{
       const application = req.body;
       const result = await applicationCollection.insertOne(application);
       res.send(result);
     })
 
-    app.get('/applications', async(req, res)=>{
-      const applications = await applicationCollection.find().toArray();
-      res.send(applications);
-    })
+    //personal
+    // app.get('/applications', async(req, res)=>{
+    //   const applications = await applicationCollection.find().toArray();
+    //   res.send(applications);
+    // })
 
 
     // Send a ping to confirm a successful connection
